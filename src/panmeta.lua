@@ -1,9 +1,26 @@
-local panmeta = {_version = "0.1.0"}
-local panlunatic = require "panlunatic"
+--[[
+Panmeta – normalize author/affiliation meta variables
 
+Copyright (c) 2017 Albert Krewinkel, Robert Winkler
+
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted, provided that the above copyright notice
+and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+THIS SOFTWARE.
+]]
+local _version = "0.1.0"
 local options = {
   json_values = true
 }
+
+local panlunatic = require "panlunatic"
 
 local MetaObjectList = {}
 function MetaObjectList:new (item_class)
@@ -133,7 +150,7 @@ local function canonicalize_authors(raw_authors, raw_institutes)
   local affiliations = Institutes:init{}
   authors:each(function (_, author)
       if not author.institute then
-        author.institute = {}
+        author.institute = Institutes:init{}
       end
       for i, authinst in ipairs(author.institute) do
         author.institute[i] = insertMergeUniqueName(affiliations, authinst)
@@ -151,6 +168,7 @@ local function canonicalize_authors(raw_authors, raw_institutes)
 end
 
 return {
+  _version = _version,
   Authors = Authors,
   Institutes = Institutes,
   canonicalize_authors = canonicalize_authors,
