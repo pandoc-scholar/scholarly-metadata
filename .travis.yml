@@ -1,0 +1,25 @@
+sudo: false
+language: generic
+
+addons:
+  apt:
+    packages:
+      - luarocks
+
+cache:
+  directories:
+  - $HOME/.luarocks
+
+before_install:
+  - luarocks install --local busted
+  - luarocks install --local luarocks
+  # Set path to include executables installed vialuarocks
+  - PATH="${HOME}/.luarocks/bin:$PATH"
+  # Set lua path to include luarocks
+  - eval "$(luarocks path)"
+
+install:
+  - luarocks make --local rockspecs/panmeta-scm-0.rockspec
+
+script:
+  - busted tests
