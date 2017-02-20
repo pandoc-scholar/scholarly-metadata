@@ -17,7 +17,7 @@ before_install:
   - eval "$(luarocks path)"
   # Ensure the newest versions of busted and luarocks are installed
   - luarocks install --local busted
-  - luarocks install --local luarocks
+  - luarocks --version | grep -q '2\.4\..$' || luarocks install --local luarocks
 
 install:
   - luarocks make --local rockspecs/panmeta-scm-0.rockspec
