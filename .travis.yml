@@ -11,12 +11,13 @@ cache:
   - $HOME/.luarocks
 
 before_install:
-  - luarocks install --local busted
-  - luarocks install --local luarocks
   # Set path to include executables installed vialuarocks
   - PATH="${HOME}/.luarocks/bin:$PATH"
   # Set lua path to include luarocks
   - eval "$(luarocks path)"
+  # Ensure the newest versions of busted and luarocks are installed
+  - luarocks install --local busted
+  - luarocks install --local luarocks
 
 install:
   - luarocks make --local rockspecs/panmeta-scm-0.rockspec
