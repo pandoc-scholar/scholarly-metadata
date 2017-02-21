@@ -7,15 +7,32 @@ addons:
       - luarocks
 
 before_install:
+  # Ensure the newest versions of busted and luarocks are installed
+  - luarocks install --local busted
+  # install new luarocks version
+  - luarocks install --local luarocks
   # Set path to include executables installed vialuarocks
   - PATH="${HOME}/.luarocks/bin:${PATH}"
   # Set lua path to include luarocks
   - eval "$(luarocks path)"
-  # Ensure the newest versions of busted and luarocks are installed
-  - luarocks install --local busted
 
 install:
   - luarocks make --local rockspecs/panmeta-scm-0.rockspec
 
 script:
   - busted tests
+
+before_deploy:
+  - mkdir -p dist/luarocks
+  - luarocks install --tree=dist/luarocks rockspecs/panmeta-scm-0.rockspec
+  - cp -av dist/luarocks/share/lua/5.1 dist/panmeta
+  - tar zvcf dist/panmeta.tar.gz -C dist panmeta
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  file: dist/panmeta.tar.gz
+  api_key:
+    secure: Xbdxm1t+TXWg7jEI0hFB9llYh67QDubPXX/reh0hH/6c5INpTKJj3QLeV5jXg4Si/AqlE4SiYw8QkIHmRVUrcE30HSu/8ju8ydi2uGq8AmnAVCguQZmbb7BS1Wq7IR+swALXoH9ChJU994QqrxB7Og/kF7aDUSBsWW1EFYenhHGLx8Xaa9am25bmG44c7SbhEc49782xFBI94d7sE5ZxCzLfVVvJ2loDlzg6jTaEFetKKLkfClSywuOd2/T48HNDTJtYiVasLJypICN2P1w4kmtAAVqs+dFbbaVXxi/5Yo7mbXRVWLZVHnmnv+2gP77nMsQzq9QFjTPJaaeZ2C0b7vagQKiC5VGxDtZdDbl3VZsknKfuVc0iryQlFyUj1n+ROejaQy0Rikb8119F3bM2RV9/L1ANzZ+apSFaUlQvYmC+rH//XOBbWmXmBK12o1lw6Lh5N/8ZSySZEKm/nTPYi/ubX6Ii8eVVrTgJXUzpbMWjnkoWxOaP12gaGDlAXuHmpaoO91DYnXZA21tA3XppUkR6Zd9ktUg9pUVs6gp41qdppCAxaq7Vw548TDHn0WAASZHqyxEzaYNInEE5TS/zBVjVlS+HPL9wWeYSvm5fOWS2HPjeZdDs1JJM9y49pJzHCOuJ5vUmALbJn2kRnvhuqug7bdGrKdgqEy7u1GcIN5c=
+  on:
+    repo: formatting-science/panmeta
