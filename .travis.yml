@@ -6,18 +6,13 @@ addons:
     packages:
       - luarocks
 
-cache:
-  directories:
-  - $HOME/.luarocks
-
 before_install:
   # Set path to include executables installed vialuarocks
-  - PATH="${HOME}/.luarocks/bin:$PATH"
+  - PATH="${HOME}/.luarocks/bin:${PATH}"
   # Set lua path to include luarocks
   - eval "$(luarocks path)"
   # Ensure the newest versions of busted and luarocks are installed
   - luarocks install --local busted
-  - luarocks --version | grep -q '2\.4\..$' || luarocks install --local luarocks
 
 install:
   - luarocks make --local rockspecs/panmeta-scm-0.rockspec
