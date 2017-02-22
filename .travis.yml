@@ -26,6 +26,7 @@ before_deploy:
   - mkdir -p dist/luarocks
   - luarocks install --tree=dist/luarocks rockspecs/panmeta-scm-0.rockspec
   - cp -av dist/luarocks/share/lua/5.1 dist/panmeta
+  - cp -av writers dist/panmeta
   - tar zvcf dist/panmeta.tar.gz -C dist panmeta
 
 deploy:
