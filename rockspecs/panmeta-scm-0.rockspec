@@ -19,6 +19,7 @@ dependencies = {
 
 build = {
   type = "builtin",
+  copy_directories = { "writers" },
   modules = {
     panmeta = "src/panmeta.lua",
     cito = "src/cito.lua",

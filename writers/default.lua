@@ -1,5 +1,15 @@
-panlunatic = require("panlunatic")
-panmeta = require("panmeta")
+--
+-- default.lua
+--
+-- Copyright (c) 2017 Albert Krewinkel, Robert Winkler
+--
+-- This library is free software; you can redistribute it and/or modify it
+-- under the terms of the ISC license. See LICENSE for details.
+
+package.path = package.path .. ";../?.lua"
+
+panlunatic = require "panlunatic"
+panmeta = require "panmeta"
 cito = require "cito"
 setmetatable(_G, {__index = panlunatic})
 

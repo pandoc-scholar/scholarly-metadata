@@ -6,7 +6,8 @@
 -- This library is free software; you can redistribute it and/or modify it
 -- under the terms of the ISC license. See LICENSE for details.
 
-local _version = "0.0.1"
+package.path = package.path .. ";../?.lua"
+
 local json = require "dkjson"
 local cito = require "cito"
 local panmeta = require "panmeta"
