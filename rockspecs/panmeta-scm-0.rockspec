@@ -21,5 +21,6 @@ build = {
   type = "builtin",
   modules = {
     panmeta = "src/panmeta.lua",
+    cito = "src/cito.lua",
   },
 }
