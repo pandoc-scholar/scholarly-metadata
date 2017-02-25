@@ -33,6 +33,7 @@ describe("Panmeta", function ()
            { name = "John Doe",
              abbreviation = "John Doe",
              index = 1,
+             first_author = 1,
              institute = {},
              institute_indices = {},
              institute_alpha_indices = {},
@@ -40,6 +41,7 @@ describe("Panmeta", function ()
            { name = "Jane Doe",
              abbreviation = "Jane Doe",
              index = 2,
+             last_author = 1,
              institute = {},
              institute_indices = {},
              institute_alpha_indices = {},
@@ -64,6 +66,7 @@ describe("Panmeta", function ()
         { name = "Jean–Luc Picard",
           abbreviation = "Jean–Luc Picard",
           index = 1,
+          first_author = 1,
           institute = {{
               name = "USS Enterprise NCC-1701-D",
               abbreviation = "enterprise",
@@ -76,6 +79,7 @@ describe("Panmeta", function ()
         { name = "Benjamin Sisko",
           abbreviation = "Benjamin Sisko",
           index = 2,
+          last_author = 1,
           institute = {{
             name = "Deep Space 9",
             abbreviation = "ds9",

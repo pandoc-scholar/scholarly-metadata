@@ -182,6 +182,9 @@ local function canonicalize_authors(raw_authors, raw_institutes)
         function(inst) return inst.index end
       )
   end)
+  -- add additional positional information to authors
+  authors[1].first_author = 1
+  authors[#authors].last_author = 1
   return authors, affiliations
 end
 
