@@ -166,7 +166,13 @@ local function canonicalize_authors(raw_authors, raw_institutes)
   end)
   -- add indices to affiliations
   affiliations:each(function (i, affl) affl.index = i end)
-  affiliations:each(function (i, affl) affl.alpha_index = to_alpha_index(i) end)
+  affiliations:each(function (i, affl)
+      if options.json_values then
+        affl.alpha_index = panlunatic.Str(to_alpha_index(i))
+      else
+        affl.alpha_index = to_alpha_index(i)
+      end
+  end)
   -- set institute_indices for all authors
   authors:each(function (k, author)
       author.institute_alpha_indices = author.institute:map(
