@@ -141,6 +141,14 @@ function insertMergeUniqueName (list, namedObj)
   return namedObj
 end
 
+local function to_alpha_index(i)
+  local alphabet = {
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+  }
+  return alphabet[i]
+end
+
 local function canonicalize_authors(raw_authors, raw_institutes)
   local authors = Authors:init(raw_authors)
   local all_institutes = Institutes:init(raw_institutes)
@@ -158,8 +166,12 @@ local function canonicalize_authors(raw_authors, raw_institutes)
   end)
   -- add indices to affiliations
   affiliations:each(function (i, affl) affl.index = i end)
+  affiliations:each(function (i, affl) affl.alpha_index = to_alpha_index(i) end)
   -- set institute_indices for all authors
   authors:each(function (k, author)
+      author.institute_alpha_indices = author.institute:map(
+        function(inst) return inst.alpha_index end
+      )
       author.institute_indices = author.institute:map(
         function(inst) return inst.index end
       )
