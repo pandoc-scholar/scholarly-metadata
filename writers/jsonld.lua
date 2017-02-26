@@ -35,6 +35,7 @@ local function Authors(authors)
   for i = 1, #authors do
     authors_json[i] = {
       ['@type']       = "Person",
+      ['@id']         = authors[i].orcid and ("https://orcid.org/" .. authors[i].orcid),
       ["name"]        = authors[i].name,
       ["affiliation"] = authors[i].institute and Organizations(authors[i].institute),
       ['email']       = authors[i].email,
