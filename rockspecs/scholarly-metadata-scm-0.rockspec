@@ -1,13 +1,13 @@
-package = "panmeta"
+package = "scholarly-metadata"
 version = "scm-0"
 
 source = {
-  url = "git://github.com/formatting-science/panmeta"
+  url = "git://github.com/pandoc-scholar/scholarly-metadata"
 }
 
 description = {
   summary = "Utilities for scientific publishing with pandoc",
-  homepage = "https://github.com/formatting-science/panmeta",
+  homepage = "https://github.com/pandoc-scholar/scholarly-metadata",
   license = "ISC",
 }
 
