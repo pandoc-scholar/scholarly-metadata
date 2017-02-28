@@ -6,7 +6,7 @@
 -- This library is free software; you can redistribute it and/or modify it
 -- under the terms of the ISC license. See LICENSE for details.
 
-package.path = package.path .. ";panmeta/?.lua"
+package.path = package.path .. ";scholarly-metadata/?.lua"
 
 local json = require "dkjson"
 local cito = require "cito"
