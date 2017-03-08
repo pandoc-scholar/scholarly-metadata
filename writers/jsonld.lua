@@ -19,11 +19,22 @@ local bibliography = nil
 local citation_ids = {}
 local citations_by_property = {}
 
+local function bibliography(bibfilename)
+  if not bibfilename then
+    return {}
+  end
+  local bibfile = io.popen("pandoc-citeproc --bib2json " .. bibfilename, "r")
+  local jsonstr = bibfile:read("*a")
+  bibfile:close()
+  return json.decode(jsonstr)
+end
+
 function Doc(body, meta, vars)
   meta.author, meta.institute =
     scholarlymeta.canonicalize_authors()
   meta.citation_ids = citation_ids
   meta.cito_cites = citations_by_property
+  meta.bibliography_records = bibliography(meta.bibliography)
   local jsonld = scholarlyjsonld.json_ld(meta)
   return json.encode(jsonld)
 end

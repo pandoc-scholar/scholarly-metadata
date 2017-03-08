@@ -38,18 +38,7 @@ local function Authors(authors)
   return authors_json
 end
 
-local function bibliography(bibfilename)
-  if not bibfilename then
-    return {}
-  end
-  local bibfile = io.popen("pandoc-citeproc --bib2json " .. bibfilename, "r")
-  local jsonstr = bibfile:read("*a")
-  bibfile:close()
-  return json.decode(jsonstr)
-end
-
-local function Cito (bibfile, cites_by_cito_property)
-  local bibjson = bibliography(bibfile)
+local function Cito (bibjson, cites_by_cito_property)
   function find_citation(id)
     -- sloooow
     for i = 1, #bibjson do
@@ -79,8 +68,7 @@ local function Cito (bibfile, cites_by_cito_property)
   return res
 end
 
-local function Citations (bibfile, citation_ids)
-  local bibjson = bibliography(bibfile)
+local function Citations (bibjson, citation_ids)
   function find_citation(id)
     -- sloooow
     for i = 1, #bibjson do
@@ -177,9 +165,9 @@ function json_ld(meta)
     ["date"]      = meta.date or os.date("%Y-%m-%d"),
     -- ["image"]     = meta.image or default_image,
     ["isFree"]    = accessible_for_free,
-    ["citation"]  = Citations(meta.bibliography, meta.citation_ids),
+    ["citation"]  = Citations(meta.bibliography_records, meta.citation_ids),
   }
-  for k, v in pairs(Cito(meta.bibliography, meta.cito_cites)) do
+  for k, v in pairs(Cito(meta.bibliography_records, meta.cito_cites)) do
     res[k] = v
   end
   return res
