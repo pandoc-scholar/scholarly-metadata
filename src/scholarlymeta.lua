@@ -1,5 +1,5 @@
 --[[
-Panmeta – normalize author/affiliation meta variables
+ScholarlyMeta – normalize author/affiliation meta variables
 
 Copyright (c) 2017 Albert Krewinkel, Robert Winkler
 
@@ -15,7 +15,7 @@ OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
 TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
 THIS SOFTWARE.
 ]]
-local _version = "0.1.0"
+local _version = "0.2.0"
 local options = {
   json_values = true
 }
@@ -173,8 +173,8 @@ local function canonicalize_authors(raw_authors, raw_institutes)
         affl.alpha_index = to_alpha_index(i)
       end
   end)
-  -- set institute_indices for all authors
   authors:each(function (k, author)
+      -- set institute_indices for all authors
       author.institute_alpha_indices = author.institute:map(
         function(inst) return inst.alpha_index end
       )

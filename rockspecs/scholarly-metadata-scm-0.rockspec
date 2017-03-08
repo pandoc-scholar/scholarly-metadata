@@ -21,7 +21,7 @@ build = {
   type = "builtin",
   copy_directories = { "writers" },
   modules = {
-    ["panmeta"] = "src/panmeta.lua",
+    ["panmeta"] = "src/scholarlymeta.lua",
     ["cito"] = "src/cito.lua",
   },
 }
