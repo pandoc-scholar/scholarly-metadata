@@ -21,11 +21,11 @@ local citations_by_property = {}
 
 function Doc(body, meta, vars)
   meta.author, meta.institute =
-    scholarlymeta.canonicalize_authors(meta.author, meta.institute)
+    scholarlymeta.canonicalize_authors()
   meta.citation_ids = citation_ids
   meta.cito_cites = citations_by_property
   local jsonld = scholarlyjsonld.json_ld(meta)
-  return json.encode(res)
+  return json.encode(jsonld)
 end
 
 ------- Inlines -------

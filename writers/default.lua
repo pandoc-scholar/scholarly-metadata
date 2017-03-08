@@ -9,7 +9,7 @@
 package.path = package.path .. ";scholarly-metadata/?.lua"
 
 panlunatic = require "panlunatic"
-panmeta = require "panmeta"
+scholarlymeta = require "scholarlymeta"
 cito = require "cito"
 setmetatable(_G, {__index = panlunatic})
 
@@ -18,7 +18,7 @@ local in_abstract = false
 
 function Doc(body, meta, variables)
   local authors, affiliations =
-    panmeta.canonicalize_authors(meta.author, meta.institute)
+    scholarlymeta.canonicalize_authors(meta.author, meta.institute)
   meta.author = {}
   for k, author in ipairs(authors) do
     if author.institute and author.institute[1] then
