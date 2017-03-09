@@ -26,7 +26,6 @@ before_deploy:
   - mkdir -p dist/luarocks
   - luarocks install --tree=dist/luarocks rockspecs/scholarly-metadata-scm-0.rockspec
   - cp -av dist/luarocks/share/lua/5.1 dist/scholarly-metadata
-  - cp -av writers dist/scholarly-metadata
   - tar zvcf dist/scholarly-metadata.tar.gz -C dist scholarly-metadata
   - (cd dist && zip -r scholarly-metadata.zip scholarly-metadata)
 
