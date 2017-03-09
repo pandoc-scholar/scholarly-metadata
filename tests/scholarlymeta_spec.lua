@@ -1,5 +1,5 @@
 --[[
-Panluna test suite
+scholarly-metadata test suite
 
 Copyright (c) 2017 Albert Krewinkel
 
@@ -16,17 +16,17 @@ TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
 THIS SOFTWARE.
 ]]
 package.path = package.path .. ";../src/?.lua"
-local panmeta = require "panmeta"
-setmetatable(_G, {__index = panmeta})
+local scholarlymeta = require "scholarlymeta"
+setmetatable(_G, {__index = scholarlymeta})
 
 describe("Panmeta", function ()
   it("specifies a version", function ()
-    assert.truthy(panmeta._version)
+    assert.truthy(scholarlymeta._version)
   end)
   it("canonicalizes a list of authors", function ()
        local orig_authors = {"John Doe", "Jane Doe"}
        local authors, affiliations =
-         panmeta.canonicalize_authors(orig_authors)
+         scholarlymeta.canonicalize_authors(orig_authors)
        assert.is.same(
          authors,
          {
@@ -50,7 +50,7 @@ describe("Panmeta", function ()
        )
   end)
   it("canonicalizes a list of authors with institutes", function ()
-    panmeta.options.json_values = false
+    scholarlymeta.options.json_values = false
     local orig_authors = {
       {["Jean–Luc Picard"] = { institute = "enterprise" }},
       {["Benjamin Sisko"] = { institute = "ds9" }}
@@ -60,7 +60,7 @@ describe("Panmeta", function ()
       {ds9 = "Deep Space 9"},
     }
     local authors, affiliations =
-      panmeta.canonicalize_authors(orig_authors, orig_institutes)
+      scholarlymeta.canonicalize_authors(orig_authors, orig_institutes)
     assert.is.same(
       {
         { name = "Jean–Luc Picard",
