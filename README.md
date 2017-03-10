@@ -1,8 +1,9 @@
 # Scholarly Metadata
 
-[![github release](https://img.shields.io/github/release/pandoc-scholar/scholarly-metadata.svg?label=current+release)](https://github.com/pandoc-scholar/scholarly-metadata/releases)
-[![travis build status](https://img.shields.io/travis/pandoc-scholar/scholarly-metadata/master.svg?style=flat-square)](https://travis-ci.org/pandoc-scholar/scholarly-metadata)
-[![license](https://img.shields.io/github/license/pandoc-scholar/scholarly-metadata.svg?style=flat-square)](./LICENSE)
+[![release]](https://github.com/pandoc-scholar/scholarly-metadata/releases)
+[![DOI]](https://zenodo.org/badge/latestdoi/82491456)
+[![license]](./LICENSE)
+[![build]](https://travis-ci.org/pandoc-scholar/scholarly-metadata)
 
 Process and normalize pandoc metadata for use with scientific articles.
 
@@ -23,6 +24,10 @@ scripting language build into pandoc.
 The most common use-case will involve only the writer scripts, but the library
 scripts are available for custom writers extending the present capabilities.
 
+[release]: https://img.shields.io/github/release/pandoc-scholar/scholarly-metadata.svg
+[license]: https://img.shields.io/github/license/pandoc-scholar/scholarly-metadata.svg
+[build]:   https://img.shields.io/travis/pandoc-scholar/scholarly-metadata/master.svg
+[DOI]: https://zenodo.org/badge/82491456.svg
 
 ## Installation
 
