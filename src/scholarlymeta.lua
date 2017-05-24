@@ -15,13 +15,14 @@ OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
 TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
 THIS SOFTWARE.
 ]]
-local _version = "0.2.0"
+local _version = "1.0.2"
 local options = {
   json_values = true
 }
 
 local panlunatic = require "panlunatic"
 
+--- List of canonicalized metadata objects.
 local MetaObjectList = {}
 function MetaObjectList:new (item_class)
   local o = {item_class = item_class}
@@ -56,6 +57,9 @@ function MetaObjectList:each (fn)
   end
 end
 
+--- Metadata object with a name. The name is either taken directly from the
+-- `name` field, or from the *only* field name if the object is a dictionary
+-- with just one entry.
 local NamedObject = {}
 function NamedObject:new (o)
   local o = o or {}
@@ -66,13 +70,17 @@ end
 function NamedObject:canonicalize (raw_item, index)
   local item = self:new{index = index}
   if type(raw_item) ~= "table" then
+    -- if the object isn't a table, just use its value as a name.
     item.name = tostring(raw_item)
     item.abbreviation = tostring(raw_item)
   elseif raw_item.name ~= nil then
+    -- object has name attribute → just use the object as is
     for k, v in pairs(raw_item) do
       item[k] = v
     end
   else
+    -- the first entry's key is taken as the name, the value contains the
+    -- attributes. Other key/value pairs are silently ignored.
     raw_name, item_attributes = next(raw_item)
     if options.json_values then
       item.name = panlunatic.Str(tostring(raw_name))
@@ -92,9 +100,11 @@ function NamedObject:canonicalize (raw_item, index)
   return item
 end
 
+--- Institutes / Affiliations
 local Institute = NamedObject:new()
 local Institutes = MetaObjectList:new(Institute)
 
+--- Author
 local Author = NamedObject:new()
 local Authors = MetaObjectList:new(Author)
 function Authors:resolve_institutes (institutes)
