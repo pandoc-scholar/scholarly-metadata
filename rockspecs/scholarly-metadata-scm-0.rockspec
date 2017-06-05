@@ -22,5 +22,6 @@ build = {
   modules = {
     ["scholarlymeta"] = "src/scholarlymeta.lua",
     ["cito"] = "src/cito.lua",
+    ["titleblocks"] = "src/titleblocks.lua",
   },
 }
