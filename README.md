@@ -1,5 +1,9 @@
 # Scholarly Metadata
 
+:warning: DEPRECATED :warning: This package is based upon outdated software. Use
+the appropriate filters from the official [pandoc Lua filters
+repository](https://github.com/pandoc/lua-filters) instead.
+
 [![release]](https://github.com/pandoc-scholar/scholarly-metadata/releases)
 [![DOI]](https://zenodo.org/badge/latestdoi/82491456)
 [![license]](./LICENSE)
